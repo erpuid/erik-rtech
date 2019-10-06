@@ -46,15 +46,6 @@
     <xacro:default_inertial mass="10"/>
   </link>
 
-  <link name="base_footprint" >
-  </link>
-
-  <joint name="link_footprint" type="fixed">
-    <parent link="base_footprint"/>
-    <child link="base_link"/>
-    <origin xyz="0 0 ${bodylen/2 + wheeldiam + 0.1}" rpy="0 0 0"/>
-  </joint>
-
   <xacro:macro name="wheel" params="prefix suffix reflect">
 
     <link name="${prefix}_${suffix}_wheel">
@@ -269,6 +260,14 @@
     <origin xyz="${.707*width+0.04} 0 ${.707*width}"/>
   </joint>
 
+  <link name="base_footprint" >
+  </link>
 
+  <joint name="link_footprint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_footprint"/>
+    <origin xyz="0 0 -${bodylen/2 + wheeldiam + 0.1}" rpy="0 0 0"/>
+
+  </joint>
 
 </robot>
