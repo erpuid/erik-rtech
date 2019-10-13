@@ -241,16 +241,16 @@
     <xacro:default_inertial mass="1"/>
   </link>
 
-  <link name="lens">
+  <link name="lense">
     <visual>
-      <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
         <cylinder radius="${lensrad}" length="${lenslen}"/>
       </geometry>
       <material name="black"/>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
         <cylinder radius="${lensrad}" length="${lenslen}"/>
       </geometry>
@@ -258,9 +258,18 @@
     <xacro:default_inertial mass="0.1"/>
   </link>
 
-  <joint name="head_lens" type="fixed">
+  <link name="eye">
+  </link>
+
+  <joint name="lense_eye" type="fixed">
+    <parent link="eye"/>
+    <child link="lense"/>
+    <origin xyz="0 0 0" rpy="${pi/2} ${pi} ${pi/2}"/>
+  </joint>
+
+  <joint name="head_lense" type="fixed">
     <parent link="box" />
-    <child link="lens" />
+    <child link="eye" />
   </joint>
 
   <joint name="tobox" type="fixed">
